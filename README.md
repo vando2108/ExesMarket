@@ -4,13 +4,13 @@
 
 ## Công nghệ được sử dụng trong app.
 
-Thiết kế phần UI: sử dụng Flutter (Dart).
+- Thiết kế phần UI: sử dụng Flutter (Dart).
 
-NodeJS: deploy API lên server
+- NodeJS: deploy API lên server
 
-MongoDB: nơi lưu trữ database cũng như get thông tin từ API
+- MongoDB: nơi lưu trữ database cũng như get thông tin từ API
 
-OpenCV: phần hệ thống đề xuất về styles quần áo, đo cân nặng và chiều cao.
+- OpenCV: phần hệ thống đề xuất về styles quần áo, đo cân nặng và chiều cao.
 
 ## Tính năng của phần mềm
 
