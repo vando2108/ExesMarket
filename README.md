@@ -1,4 +1,4 @@
-# ExesMarket
+# ExesMarket của nhóm RedBull
 
 Ứng dụng cho phép thuê quần áo cũ cũng như bán lại quần áo cũ.
 
