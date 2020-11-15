@@ -7,6 +7,7 @@ import 'dart:convert';
 import '../Components/CreateNew.dart';
 import '../Components/UpdateItem.dart';
 import '../Components/SubPage.dart';
+import '../Components/CreateProfile.dart';
 class PersonalPage extends StatefulWidget {
   @override
   _PersonalPageState createState() => _PersonalPageState();
@@ -111,22 +112,16 @@ class _PersonalPageState extends State<PersonalPage>
                                 builder: (context) =>
                                     AddItem())); 
                   }),
+              
               SpeedDialChild(
                 child: Icon(Icons.book),
                 backgroundColor: kPrimaryColor,
-                label: "UPDATE",
+                label: "CREATE PROFILE",
                 onTap: () {
-                  Navigator.push( context,MaterialPageRoute(
+                   Navigator.push( context,MaterialPageRoute(
                                 builder: (context) =>
-                                    UpdateItem()));
+                                    AddProfile()));
                 },
-              ),
-              SpeedDialChild(
-                child: Icon(Icons.camera),
-                backgroundColor: kPrimaryColor,
-                label: "DELETE",
-                onTap: (){
-                }
               ),
             ]),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -205,6 +200,21 @@ class _PersonalPageState extends State<PersonalPage>
         itemBuilder: (BuildContext context, int index) {
           String image = data[index]["image"][0].toString();
           return GestureDetector(
+            onLongPress: (){
+              network.delete("/blogpost/delete/" + data[index]["_id"].toString()).then((value){
+                if (value.statusCode == 200) {
+                  print("Delete success !");
+                }
+                else throw Exception("Problem with deleting");
+              });
+            },
+            onDoubleTap: (){
+               Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            UpdateItem(val: data[index])));
+            },
               onTap: () {
                 Navigator.push(
                     context,

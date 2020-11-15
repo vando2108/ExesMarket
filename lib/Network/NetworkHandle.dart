@@ -85,6 +85,22 @@ class NetworkHandler {
     return response;
   }
 
+  Future<http.Response> delete(String url) async {
+    final prefs = await SharedPreferences.getInstance();
+    final key = "token";
+    final token = prefs.get(key) ?? 0;
+    url = formater(url);
+    print(url);
+    var response = await http.delete(
+      url,
+      headers: {
+        "Content-type": "application/json",
+        "Authorization": "Bearer $token"
+      },
+    );
+    return response;
+  }
+
   Future<http.StreamedResponse> patchImage(String url, String filepath) async {
     final prefs = await SharedPreferences.getInstance();
     url = formater(url);

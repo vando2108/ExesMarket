@@ -35,7 +35,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
   @override
   void initState(){
-    startTimer();
+   // startTimer();
     super.initState();
   }
   @override
@@ -46,16 +46,52 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context){
     return Scaffold(
-      body:Stack(children: [
+    body:SingleChildScrollView(
+      child: Stack(
+      children: [
          Container(
         height: 400,
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
         image: DecorationImage(image: AssetImage("assets/images/cover.jpg"))
       ),),
+        Positioned(
+          top: 500,
+        child: Container(
+        height: 400,
+        width: MediaQuery.of(context).size.width,
+        decoration: BoxDecoration(
+        image: DecorationImage(image: AssetImage("assets/images/girlscoutCamp0810.jpg"))))),
+      Positioned(
+        top: 500,
+        left: 100,
+        child: Container(
+        height: 400,
+        width: MediaQuery.of(context).size.width,
+        decoration: BoxDecoration(
+        image: DecorationImage(image: AssetImage("assets/images/inline_image_preview.jpg"))))),
+          Positioned(
+        child: Container(
+        height: 400,
+        width: MediaQuery.of(context).size.width,
+        decoration: BoxDecoration(
+        image: DecorationImage(image: AssetImage("assets/images/images (1).jfif"))))),
+          Positioned(
+        child: Container(
+        height: 400,
+        width: MediaQuery.of(context).size.width,
+        decoration: BoxDecoration(
+        image: DecorationImage(image: AssetImage("assets/images/images (2).jfif"))))),
+          Positioned(
+        child: Container(
+        height: 400,
+        width: MediaQuery.of(context).size.width,
+        decoration: BoxDecoration(
+        image: DecorationImage(image: AssetImage("assets/images/images.jfif"))))),
+    
     
       ],)
-    );
+    ));
   }
 }
 

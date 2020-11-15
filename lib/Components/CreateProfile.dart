@@ -6,24 +6,23 @@ import 'package:flutter/material.dart';
 import '../MyHomePage.dart';
 import 'package:flutter_material_color_picker/flutter_material_color_picker.dart';
 
-class UpdateItem extends StatefulWidget {
-  final val;
-  UpdateItem({Key key, this.val}) : super(key: key);
+class AddProfile extends StatefulWidget {
+  AddProfile({Key key}) : super(key: key);
 
   @override
-  _UpdateItemState createState() => _UpdateItemState();
+  _AddProfileState createState() => _AddProfileState();
 }
 
-class _UpdateItemState extends State<UpdateItem> {
+class _AddProfileState extends State<AddProfile> {
   int stock = 0;
   final _globalkey = GlobalKey<FormState>();
-  TextEditingController _title = TextEditingController();
-  TextEditingController _body = TextEditingController();
-  TextEditingController _material = TextEditingController();
-  TextEditingController _image = TextEditingController();
-  TextEditingController _stock = TextEditingController();
+  TextEditingController _name = TextEditingController();
+  TextEditingController _profession = TextEditingController();
+  TextEditingController _DOB = TextEditingController();
+  TextEditingController _titleline = TextEditingController();
+  TextEditingController _about = TextEditingController();
   TextEditingController _hastag = TextEditingController();
-  TextEditingController _price = TextEditingController();
+  TextEditingController _phone = TextEditingController();
   //ImagePicker _picker = ImagePicker();
   //PickedFile _imageFile;
   IconData iconphoto = Icons.image;
@@ -100,23 +99,15 @@ class _UpdateItemState extends State<UpdateItem> {
         key: _globalkey,
         child: ListView(
           children: <Widget>[
-            titleTextField(),
+            nameTextField(),
             SizedBox(
               height: 20,
             ),
-            bodyTextField(),
+            professionTextField(),
             SizedBox(
               height: 20,
             ),
-            materialTextField(),
-            SizedBox(
-              height: 20,
-            ),
-            imageTextField(),
-            SizedBox(
-              height: 20,
-            ),
-            stockTextField(),
+            titlelineTextField(),
             SizedBox(
               height: 20,
             ),
@@ -124,25 +115,18 @@ class _UpdateItemState extends State<UpdateItem> {
             SizedBox(
               height: 20,
             ),
-            priceTextField(),
+            dobTextField(),
             SizedBox(
               height: 20,
             ),
-            choiceGender(),
-            choiceSize(),
-           Row(
-             children: [
-               Container(
-                 margin: EdgeInsets.only(left: 30),
-
-                 width:30 , height:30, color: _tempMainColor),
-                 SizedBox(width: 30),
-                OutlineButton(
-              onPressed: _openFullMaterialColorPicker,
-              child: const Text('Show full material color picker'),
+            aboutTextField(),
+            SizedBox(
+              height: 20,
             ),
-             ],
-           ),
+            phoneTextField(),
+            SizedBox(
+              height: 20,
+            ),
             SizedBox(height: 20),
             addButton(),
           ],
@@ -150,82 +134,18 @@ class _UpdateItemState extends State<UpdateItem> {
       ),
     );
   }
-  
-  Widget choiceGender(){
-    return Container(
-      height: 70,
-      padding: EdgeInsets.symmetric(horizontal: 70),
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        shrinkWrap: true,
-        primary: false,
-        itemCount: sex.length,
-        itemBuilder: (context, index){
-          return Padding(padding: EdgeInsets.all(15),
-          
-          child:  Column(
-        children: [
-      GestureDetector(
-        child: Container(height: 15, width: 15, color: color[index],),
-        onTap: (){
-          setState((){
-            for (var i = 0; i < 3;++i) color[i] = Colors.redAccent;
-            color[index] = kPrimaryColor;
 
-            _sex = sex[index];
-
-          });
-        }
-      ),
-      Text("${sex[index]}")
-
-    ],)
-    );} ));
-  }
-
-  Widget choiceSize(){
-    return Container(
-      height: 70,
-      padding: EdgeInsets.symmetric(horizontal: 70),
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        shrinkWrap: true,
-        primary: false,
-        itemCount: size.length,
-        itemBuilder: (context, index){
-          return Padding(padding: EdgeInsets.all(15),
-          
-          child:  Column(
-        children: [
-      GestureDetector(
-        child: Container(height: 15, width: 15, color: colorSize[index],),
-        onTap: (){
-          setState((){
-            for (var i = 0; i < 5;++i) colorSize[i] = Colors.redAccent;
-            colorSize[index] = kPrimaryColor;
-
-            _size = size[index];
-
-          });
-        }
-      ),
-      Text("${size[index]}")
-
-    ],)
-    );} ));
-  }
-
-  Widget titleTextField() {
+  Widget nameTextField() {
     return Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: 10,
         vertical: 10,
       ),
       child: TextFormField(
-        controller: _title,
+        controller: _name,
         validator: (value) {
           if (value.isEmpty) {
-            return "Title can't be empty";
+            return "Name can't be empty";
           }
           return null;
         },
@@ -241,23 +161,23 @@ class _UpdateItemState extends State<UpdateItem> {
               width: 2,
             ),
           ),
-          labelText: "Provide your address",
+          labelText: "Provide your name",
         ),
         maxLines: null,
       ),
     );
   }
 
-  Widget bodyTextField() {
+  Widget professionTextField() {
     return Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: 10,
       ),
       child: TextFormField(
-        controller: _body,
+        controller: _profession,
         validator: (value) {
           if (value.isEmpty) {
-            return "Type here if you have any messages";
+            return "Provide your work ";
           }
           return null;
         },
@@ -273,23 +193,23 @@ class _UpdateItemState extends State<UpdateItem> {
               width: 2,
             ),
           ),
-          labelText: "Type here if you have any messages",
+          labelText: "Provide your work",
         ),
         maxLines: null,
       ),
     );
   }
 
-  Widget materialTextField() {
+  Widget titlelineTextField() {
     return Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: 10,
       ),
       child: TextFormField(
-        controller: _material,
+        controller: _titleline,
         validator: (value) {
           if (value.isEmpty) {
-            return "item's material should not be empty";
+            return "Titleline should not be empty";
           }
           return null;
         },
@@ -305,25 +225,22 @@ class _UpdateItemState extends State<UpdateItem> {
               width: 2,
             ),
           ),
-          labelText: "Provide item's material",
+          labelText: "Provide your titleline",
         ),
         maxLines: null,
       ),
     );
   }
 
-  Widget imageTextField() {
+  Widget dobTextField() {
     return Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: 10,
       ),
       child: TextFormField(
-        controller: _image,
+        controller: _DOB,
         validator: (value) {
-          if (value.isEmpty) {
-            return "Type here if you have any messages";
-          }
-          return null;
+         return null;
         },
         decoration: InputDecoration(
           border: OutlineInputBorder(
@@ -337,24 +254,24 @@ class _UpdateItemState extends State<UpdateItem> {
               width: 2,
             ),
           ),
-          labelText: "Provide some images for better visuality",
+          labelText: "Provide your date of birth",
         ),
         maxLines: null,
       ),
     );
   }
 
-  Widget stockTextField() {
+  Widget aboutTextField() {
     return Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: 10,
         vertical: 10,
       ),
       child: TextFormField(
-        controller: _stock,
+        controller: _about,
         validator: (value) {
           if (value.isEmpty) {
-            return "Title can't be empty";
+            return "Background can't be empty";
           }
           return null;
         },
@@ -370,7 +287,7 @@ class _UpdateItemState extends State<UpdateItem> {
               width: 2,
             ),
           ),
-          labelText: "Number of items",
+          labelText: "Provide your background info",
         ),
       
         maxLines: null,
@@ -411,17 +328,17 @@ class _UpdateItemState extends State<UpdateItem> {
     );
   }
 
-  Widget priceTextField() {
+  Widget phoneTextField() {
     return Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: 10,
         vertical: 10,
       ),
       child: TextFormField(
-        controller: _price,
+        controller: _phone,
         validator: (value) {
           if (value.isEmpty) {
-            return "Price can't be empty";
+            return "Phone number can't be empty";
           }
           return null;
         },
@@ -437,7 +354,7 @@ class _UpdateItemState extends State<UpdateItem> {
               width: 2,
             ),
           ),
-          labelText: "Price of item",
+          labelText: "Provide your phonenumber",
         ),
         maxLines: null,
       ),
@@ -449,23 +366,19 @@ class _UpdateItemState extends State<UpdateItem> {
       onTap: () async {
         if (_globalkey.currentState.validate()) {
           print("haha");
-          var id = widget.val["_id"];
-          var response = await networkHandler.patch("/blogpost/update/" + id.toString(), {
-              "title":  _title.text,
-              "body": _body.text,
-              "material": _material.text,
-              "image":  [_image.text],
-              "stock": _stock.text,
-              "hastag": [_hastag.text],
-              "price": _price.text,
-              "color": _tempMainColor.toString(),
-              "sex": _sex,
-              "size": _size
+          var response = await networkHandler.post("/profile/add", {
+              "name":  _name.text,
+              "profession": _profession.text,
+              "DOB":  [_DOB.text],
+              "titleline": _titleline.text,
+              "about": _about.text,
+              "phone": _phone.text,
+              "hastag":[_hastag],
           });
           print(response.statusCode);
 
           if (response.statusCode == 200 || response.statusCode == 201) {
-            print("Success update new item");
+            print("Success add new item");
             Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(builder: (context) => MyHomePage()),
@@ -481,7 +394,7 @@ class _UpdateItemState extends State<UpdateItem> {
               borderRadius: BorderRadius.circular(10), color: Colors.teal),
           child: Center(
               child: Text(
-            "Update item",
+            "Add item",
             style: TextStyle(
                 color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
           )),
