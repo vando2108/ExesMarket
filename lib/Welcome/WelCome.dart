@@ -2,6 +2,7 @@ import 'package:ExesMarket/Welcome/SignIn.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'SignIn.dart';
+import 'package:ExesMarket/Constants.dart';
 
 class SplashScreen extends StatefulWidget {
 @override
@@ -35,7 +36,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
   @override
   void initState(){
-   // startTimer();
+    startTimer();
     super.initState();
   }
   @override
@@ -46,15 +47,20 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context){
     return Scaffold(
-    body:SingleChildScrollView(
+    body:Container(
+      height: MediaQuery.of(context).size.height,
+      width: MediaQuery.of(context).size.width,
       child: Stack(
       children: [
+        Positioned(
+          top: 0,
+          child:
          Container(
         height: 400,
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
         image: DecorationImage(image: AssetImage("assets/images/cover.jpg"))
-      ),),
+      ),)),
         Positioned(
           top: 500,
         child: Container(
@@ -63,7 +69,7 @@ class _SplashScreenState extends State<SplashScreen> {
         decoration: BoxDecoration(
         image: DecorationImage(image: AssetImage("assets/images/girlscoutCamp0810.jpg"))))),
       Positioned(
-        top: 500,
+        top: 350,
         left: 100,
         child: Container(
         height: 400,
@@ -71,25 +77,55 @@ class _SplashScreenState extends State<SplashScreen> {
         decoration: BoxDecoration(
         image: DecorationImage(image: AssetImage("assets/images/inline_image_preview.jpg"))))),
           Positioned(
+            top: 100,
+            left: 0,
         child: Container(
-        height: 400,
+        height: 600,
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
         image: DecorationImage(image: AssetImage("assets/images/images (1).jfif"))))),
           Positioned(
+            left: 100,
         child: Container(
-        height: 400,
+        height: 700,
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
         image: DecorationImage(image: AssetImage("assets/images/images (2).jfif"))))),
           Positioned(
+            left: 0, 
+            top: 800,
         child: Container(
         height: 400,
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
         image: DecorationImage(image: AssetImage("assets/images/images.jfif"))))),
     
-    
+       Stack(
+         children:[
+       Positioned(
+         left: 24,
+         top: MediaQuery.of(context).size.height * 0.5,
+         child: Text("WELCOME", style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: Colors.yellow))
+       ),
+        Positioned(
+         left: 20,
+         top: MediaQuery.of(context).size.height * 0.5,
+         child: Text("WELCOME", style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: kPrimaryColor))
+       ),
+         ]),
+         Stack(children: [
+ Positioned(
+          left: 25,
+         top: MediaQuery.of(context).size.height * 0.55,
+         child: Text("ExesMarket", style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold, color: Colors.yellow))
+       ),
+        Positioned(
+          left: 20,
+         top: MediaQuery.of(context).size.height * 0.55,
+         child: Text("ExesMarket", style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold, color: kPrimaryColor))
+       )
+
+         ],)
       ],)
     ));
   }

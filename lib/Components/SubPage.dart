@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../Network/NetworkHandle.dart';
 import 'dart:convert';
 import 'Dialog.dart';
+import 'PageEditHistory.dart';
 
 class SubPage extends StatefulWidget {
   final String query;
@@ -148,7 +149,11 @@ class ItemChild extends StatelessWidget {
         ])),
         GestureDetector(
           onTap: (){
-
+             Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    PageEditHistory(data: child)));
           },
           child: Icon(Icons.directions, color: Colors.grey),),
            GestureDetector(
