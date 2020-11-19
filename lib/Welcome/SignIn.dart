@@ -125,7 +125,7 @@ class _SignInPageState extends State<SignInPage> {
                       });
                       var a = networkHandler.get("/profile/getData");
                       a.then((value){
-                        print(value);
+                        //print(value);
                       });
                       Navigator.pushAndRemoveUntil(
                           context,
