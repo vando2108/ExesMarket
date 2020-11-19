@@ -92,12 +92,7 @@ class ItemChild extends StatelessWidget{
                                   maxLines: 2,
                                   style:
                                       TextStyle(fontWeight: FontWeight.w600))),
-                          Container(
-                              margin: EdgeInsets.only(top: 3, bottom: 7),
-                              child: Text(
-                                  "${val["body"]}",
-                                  maxLines: 2,
-                                  style: TextStyle(color: Colors.grey[500]))),
+                         
                            Container(
                               margin: EdgeInsets.only(top: 3, bottom: 7),
                               child: Text(
