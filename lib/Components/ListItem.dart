@@ -69,7 +69,7 @@ class ItemChild extends StatelessWidget{
     return Container(
                         margin: EdgeInsets.only(right: 10),
                         width: 150,
-                        height: MediaQuery.of(context).size.height * 0.3,
+                        height: MediaQuery.of(context).size.height * 0.2,
                         child: Column(children: [
                           Container(
                             height: 80,
@@ -96,10 +96,10 @@ class ItemChild extends StatelessWidget{
                               margin: EdgeInsets.only(top: 3, bottom: 7),
                               child: Text(
                                   "${val["body"]}",
-                                  maxLines: 2,
+                                  maxLines: 1,
                                   style: TextStyle(color: Colors.grey[500]))),
                            Container(
-                              margin: EdgeInsets.only(top: 3, bottom: 7),
+                              margin: EdgeInsets.only(top: 3, bottom: 10),
                               child: Text(
                                   "${val["username"]}",
                                   maxLines: 3,

@@ -240,7 +240,7 @@ class _AddItemState extends State<AddItem> {
               width: 2,
             ),
           ),
-          labelText: "Provide your address",
+          labelText: "Provide item's name",
         ),
         maxLines: null,
       ),

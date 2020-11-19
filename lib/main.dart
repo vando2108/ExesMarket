@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
         DeviceOrientation.portraitDown,
       ]);
     return MaterialApp (
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,

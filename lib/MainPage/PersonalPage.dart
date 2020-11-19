@@ -247,7 +247,7 @@ class _PersonalPageState extends State<PersonalPage>
           if (snapshot.hasData) {
             var mine = snapshot.data["data"];
             print(mine);
-            return Container(
+            return (mine.length > 0) ? Container(
               width: MediaQuery.of(context).size.width * 0.8,
               margin: EdgeInsets.symmetric(horizontal: 30, vertical: 70),
               padding: EdgeInsets.all(10.0),
@@ -272,6 +272,11 @@ class _PersonalPageState extends State<PersonalPage>
                 
               ]),
               decoration: BoxDecoration(color: Colors.white),
+            ) : Container(margin: EdgeInsets.symmetric(vertical: 50, horizontal : 100),
+            child: Text("Data profile has not been added", style: TextStyle(
+
+              color: kPrimaryColor, fontWeight: FontWeight.bold, fontSize: 40
+            ))
             );
           } else if (snapshot.hasError) {
             return Text("${snapshot.error}");

@@ -164,7 +164,7 @@ class _LocationState extends State<Location>
           network.post("/blogpost/getSome/Distance", {
             "distance": double.parse(distanceControl.text),
             "lat": lat,
-            "long": lng,
+            "lng": lng,
             "district": val
           }).then((value) {
             if (value.statusCode == 200) {
@@ -209,7 +209,13 @@ class _LocationState extends State<Location>
               primary: false,
               itemCount: listOfResult.length,
               itemBuilder: (context, index) {
-                return ItemChildBig(data: listOfResult[index]);
+                return Container(
+                  margin: EdgeInsets.all(3.0),
+                  color: Colors.white,
+                  padding: EdgeInsets.only(left: 20, top: 15, bottom: 15),
+                  child: Text("${listOfResult[index]["address"]}")
+
+                );
               },
             );
     return CircularProgressIndicator();

@@ -369,11 +369,11 @@ class _AddProfileState extends State<AddProfile> {
           var response = await networkHandler.post("/profile/add", {
               "name":  _name.text,
               "profession": _profession.text,
-              "DOB":  [_DOB.text],
+              "DOB":  _DOB.text,
               "titleline": _titleline.text,
               "about": _about.text,
               "phone": _phone.text,
-              "hastag":[_hastag],
+              "hastag":[_hastag.text],
           });
           print(response.statusCode);
 
