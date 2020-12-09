@@ -119,14 +119,11 @@ class _SignInPageState extends State<SignInPage> {
                       Map<String, dynamic> output = json.decode(response.body);
                       print(output["token"]);
                       await prefs.setString("token", output["token"]);
-                      setState(() {
+                      setState(() {     
                         validate = true;
                         circular = false;
                       });
-                      var a = networkHandler.get("/profile/getData");
-                      a.then((value){
-                        //print(value);
-                      });
+                      
                       Navigator.pushAndRemoveUntil(
                           context,
                           MaterialPageRoute(

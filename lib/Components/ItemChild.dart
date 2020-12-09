@@ -1,7 +1,6 @@
-import 'package:ExesMarket/Components/Detail.dart';
+import 'package:ExesMarket/Components/Detail/Detail.dart';
 import 'package:flutter/material.dart';
 import '../Constants.dart';
-import 'WallUser.dart';
 
 class ItemChildBig extends StatelessWidget {
   final data;
@@ -44,7 +43,7 @@ class ItemChildBig extends StatelessWidget {
                     "${data["body"]}",
                     maxLines: 3,
                     style: TextStyle(color: Colors.grey[500]))),
-                     Container(
+            Container(
               width: 100,
                 margin: EdgeInsets.only(top: 3, bottom: 7),
                 child: Text(

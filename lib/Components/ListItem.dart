@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import '../Constants.dart';
 import 'ListReview.dart';
-import 'WallUser.dart';
 import 'dart:convert';
-import 'Detail.dart';
+import 'Detail/Detail.dart';
 
 class CategoryScroller extends StatelessWidget {
   final String topic;
@@ -69,7 +68,7 @@ class ItemChild extends StatelessWidget{
     return Container(
                         margin: EdgeInsets.only(right: 10),
                         width: 150,
-                        height: MediaQuery.of(context).size.height * 0.2,
+                        height: MediaQuery.of(context).size.height * 0.35,
                         child: Column(children: [
                           Container(
                             height: 80,
@@ -92,12 +91,7 @@ class ItemChild extends StatelessWidget{
                                   maxLines: 2,
                                   style:
                                       TextStyle(fontWeight: FontWeight.w600))),
-                          Container(
-                              margin: EdgeInsets.only(top: 3, bottom: 7),
-                              child: Text(
-                                  "${val["body"]}",
-                                  maxLines: 1,
-                                  style: TextStyle(color: Colors.grey[500]))),
+                          
                            Container(
                               margin: EdgeInsets.only(top: 3, bottom: 10),
                               child: Text(

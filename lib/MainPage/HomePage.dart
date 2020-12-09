@@ -8,17 +8,17 @@ import 'package:flutter_tags/flutter_tags.dart';
 import '../Components/PageSearch.dart';
 import '../Network/NetworkHandle.dart';
 import 'dart:convert';
-import '../Components/SubPage.dart';
 
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin {
+class _HomePageState extends State<HomePage>
+    with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
-  
+
   NetworkHandler network = NetworkHandler();
   int _selectedIndex = 0;
   List<IconData> _icons = [
@@ -27,11 +27,7 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
     FontAwesomeIcons.clock,
   ];
 
-  List<String> _items = [
-    "male",
-    "female",
-    "unisex"
-  ];
+  List<String> _items = ["male", "female", "unisex"];
 
   Widget _buildIcon(int index) {
     return GestureDetector(
@@ -58,116 +54,98 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
 
   Future future_1;
   Future future_2;
+  Future future_3;
   Future future_4;
   bool isOn = false;
-  
+
   @override
   void initState() {
     future_1 = network.post("/blogpost/getSomeFun", {"hastag": "Vintage"});
     future_2 = network.post("/blogpost/getSomeFun", {"hastag": "Interview"});
+    future_3 = network.post("/blogpost/getSomeFun", {"hastag": "Backpacking"});
     future_4 = network.post("/blogpost/getSomeFun", {"hastag": "Dating"});
-   
+
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     var _justList = [
       _page1(),
       _page1(),
       _page1(),
     ];
     return Scaffold(
-      drawer: Drawer(
-          
-          child:Column(
-         children: [
-           Padding(
-             padding: EdgeInsets.all(15),
-             child: Text("Buy history"),
-           
-           ),
-           Padding(child: Text("Sell history"),
-           padding: EdgeInsets.all(15.0)
-           )
-         ],
-        ),),
+       
         body: SingleChildScrollView(
             child: Column(children: [
-      Stack(
-        children: [
-          Padding(
-        padding: EdgeInsets.only(left: 20.0, right: 120.0, top: 20.0),
-        child: Text(
-          'What would you like to find?',
-          style: TextStyle(
-            fontSize: 30.0,
-            fontWeight: FontWeight.bold,
+          Stack(children: [
+            Padding(
+              padding: EdgeInsets.only(left: 20.0, right: 120.0, top: 20.0),
+              child: Text(
+                'What would you like to find?',
+                style: TextStyle(
+                  fontSize: 30.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            Positioned(
+                top: 20,
+                right: 20,
+                child: IconButton(
+                  icon: Icon(Icons.local_cafe, color: kPrimaryColor),
+                  onPressed: () {
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(builder: (context) => SignInPage()),
+                        (route) => false);
+                  },
+                )),
+          ]),
+          SizedBox(height: 20.0),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: _icons
+                .asMap()
+                .entries
+                .map(
+                  (MapEntry map) => _buildIcon(map.key),
+                )
+                .toList(),
           ),
-        ),
-      ),
-      Positioned(
-        top: 20,
-        right: 20,
-        child: IconButton(
-        
-        icon: Icon(Icons.local_cafe, color: kPrimaryColor),
-        onPressed: (){
-           Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(builder: (context) => SignInPage()),
-                  (route) => false);
-            }
-        ,
-      )
-      ),
-     ]),
-      SizedBox(height: 20.0),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: _icons
-            .asMap()
-            .entries
-            .map(
-              (MapEntry map) => _buildIcon(map.key),
-            )
-            .toList(),
-      ),
-      SizedBox(height: 15),
-      CarouselWithIndicatorDemo(),
-      _trendingTag(),
-      _justList[_selectedIndex]
-    ])));
+          SizedBox(height: 15),
+          CarouselWithIndicatorDemo(),
+          _trendingTag(),
+          _justList[_selectedIndex]
+        ])));
   }
 
   Widget _page1() {
     return Column(children: [
       CategoryScroller(topic: "Vintage", future: future_1),
       CategoryScroller(topic: "Interview", future: future_2),
+      CategoryScroller(topic: "Backpacking", future: future_3),
       CategoryScroller(topic: "Dating", future: future_4),
-    
-
     ]);
   }
 
-//item people are noticing
   Widget _trendingTag() {
     return Container(
         child: Tags(
       key: _tagStateKey,
-
-      itemCount: _items.length, // required
+      itemCount: _items.length,
       itemBuilder: (int index) {
         final item = _items[index];
 
         return ItemTags(
             key: Key(index.toString()),
-            index: index, // required
+            index: index,
             title: item,
             active: false,
             activeColor: Colors.white,
             textActiveColor: Colors.black,
-            //customData: item.customData,
             textStyle: TextStyle(
               fontSize: 15,
             ),
@@ -185,17 +163,10 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
                         builder: (context) =>
                             PageSearch(query: item.title, data: data)));
               });
-
-              //Navigate to a new subpage to search items, query is item. displaying result
             });
       },
     ));
   }
 
   final GlobalKey<TagsState> _tagStateKey = GlobalKey<TagsState>();
-  _getAllItem() {
-    List<Item> lst = _tagStateKey.currentState?.getAllItem;
-    if (lst != null)
-      lst.where((a) => a.active == true).forEach((a) => print(a.title));
-  }
 }

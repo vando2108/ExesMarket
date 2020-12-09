@@ -1,17 +1,16 @@
-import 'dart:convert';
 import '../Network/NetworkHandle.dart';
 import 'package:flutter/material.dart';
 //import 'package:image_picker/image_picker.dart';
 import '../MyHomePage.dart';
-class AddBlog extends StatefulWidget {
+class AddHistory extends StatefulWidget {
   final data;
-  AddBlog({Key key, this.data}) : super(key: key);
+  AddHistory({Key key, this.data}) : super(key: key);
 
   @override
-  _AddBlogState createState() => _AddBlogState();
+  _AddHistoryState createState() => _AddHistoryState();
 }
 
-class _AddBlogState extends State<AddBlog> {
+class _AddHistoryState extends State<AddHistory> {
   int stock = 0 ;
   final _globalkey = GlobalKey<FormState>();
   TextEditingController _tele = TextEditingController();
@@ -64,13 +63,11 @@ class _AddBlogState extends State<AddBlog> {
           children: <Widget>[
             addressTextField(),
             bodyTextField(), // message from buyer to user
-            stockTextField(),
-            SizedBox(
-              height: 20,
-            ),
+            stockTextField(),          
             telephoneTextField(),
-            SizedBox(height: 20),
             districtTextField(),
+            SizedBox(height: 20),
+
             addButton(),
           ],
         ),
@@ -86,14 +83,7 @@ class _AddBlogState extends State<AddBlog> {
       ),
       child: TextFormField(
         controller: _address,
-        validator: (value) {
-          if (value.isEmpty) {
-            return "Title can't be empty";
-          } else if (value.length > 100) {
-            return "Title length should be <=100";
-          }
-          return null;
-        },
+        
         decoration: InputDecoration(
           border: OutlineInputBorder(
             borderSide: BorderSide(
@@ -109,7 +99,6 @@ class _AddBlogState extends State<AddBlog> {
           labelText: "Provide your address",
          
         ),
-        maxLength: 100,
         maxLines: null,
       ),
     );
@@ -122,12 +111,7 @@ class _AddBlogState extends State<AddBlog> {
       ),
       child: TextFormField(
         controller: _body,
-        validator: (value) {
-          if (value.isEmpty) {
-            return "Type here if you have any messages";
-          }
-          return null;
-        },
+       
         decoration: InputDecoration(
           border: OutlineInputBorder(
             borderSide: BorderSide(
@@ -140,7 +124,7 @@ class _AddBlogState extends State<AddBlog> {
               width: 2,
             ),
           ),
-          labelText: "Provide Body Your Blog",
+          labelText: "Type here if you have any message",
         ),
         maxLines: null,
       ),
@@ -156,7 +140,7 @@ class _AddBlogState extends State<AddBlog> {
         controller: _tele,
         validator: (value) {
           if (value.isEmpty) {
-            return "Body can't be empty";
+            return "Telephone can't be empty";
           }
           return null;
         },
@@ -182,13 +166,14 @@ class _AddBlogState extends State<AddBlog> {
   Widget districtTextField() {
     return Padding(
       padding: const EdgeInsets.symmetric(
+                vertical: 10,
         horizontal: 10,
       ),
       child: TextFormField(
         controller: _district,
         validator: (value) {
           if (value.isEmpty) {
-            return "Type here if you have any messages";
+            return "Provide district";
           }
           return null;
         },
@@ -204,7 +189,7 @@ class _AddBlogState extends State<AddBlog> {
               width: 2,
             ),
           ),
-          labelText: "Provide Body Your Blog",
+          labelText: "Provide district",
         ),
         maxLines: null,
       ),
@@ -241,7 +226,6 @@ class _AddBlogState extends State<AddBlog> {
           labelText: "Number of items",
          
         ),
-        maxLength: 100,
         maxLines: null,
       ),
     );

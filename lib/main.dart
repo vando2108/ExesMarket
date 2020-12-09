@@ -1,7 +1,5 @@
 import 'package:ExesMarket/Welcome/WelCome.dart';
 import 'package:flutter/material.dart';
-import 'package:ExesMarket/Welcome/SignIn.dart';
-import 'MyHomePage.dart';
 import 'Welcome/WelCome.dart';
 import 'package:flutter/services.dart';
 

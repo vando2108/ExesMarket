@@ -30,7 +30,6 @@ class _UpdateItemState extends State<UpdateItem> {
   NetworkHandler networkHandler = NetworkHandler();
 
   ColorSwatch _tempMainColor;
-  Color _tempShadeColor;
   ColorSwatch _mainColor = Colors.blue;
   List sex = ["male", "female", "unisex"];
   List color = [Colors.redAccent, Colors.redAccent,Colors.redAccent];

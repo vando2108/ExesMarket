@@ -1,10 +1,7 @@
-import 'package:ExesMarket/Constants.dart';
-
 import '../Network/NetworkHandle.dart';
 import 'package:flutter/material.dart';
 //import 'package:image_picker/image_picker.dart';
 import '../MyHomePage.dart';
-import 'package:flutter_material_color_picker/flutter_material_color_picker.dart';
 
 class AddProfile extends StatefulWidget {
   AddProfile({Key key}) : super(key: key);
@@ -28,57 +25,6 @@ class _AddProfileState extends State<AddProfile> {
   IconData iconphoto = Icons.image;
   NetworkHandler networkHandler = NetworkHandler();
 
-  ColorSwatch _tempMainColor;
-  Color _tempShadeColor;
-  ColorSwatch _mainColor = Colors.blue;
-  List sex = ["male", "female", "unisex"];
-  List color = [Colors.redAccent, Colors.redAccent,Colors.redAccent];
-
-   List size = ["S", "M", "L", "XL", "XXL" ];
-  List colorSize = [Colors.redAccent, Colors.redAccent,Colors.redAccent,Colors.redAccent,Colors.redAccent];
-  String _sex;
-  String _size;
-
-  void _openDialog(String title, Widget content) {
-    showDialog(
-      context: context,
-      builder: (_) {
-        return AlertDialog(
-          contentPadding: const EdgeInsets.all(6.0),
-          title: Text(title),
-          content: content,
-          actions: [
-            FlatButton(
-              child: Text('CANCEL'),
-              onPressed: Navigator.of(context).pop,
-            ),
-            FlatButton(
-              child: Text('SUBMIT'),
-              onPressed: () {
-                Navigator.of(context).pop();
-                setState(() {
-                  _mainColor = _tempMainColor;
-                }
-                );
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  void _openFullMaterialColorPicker() async {
-    _openDialog(
-      "Full Material Color picker",
-      MaterialColorPicker(
-        colors: fullMaterialColors,
-        selectedColor: _mainColor,
-        onMainColorChange: (color) => setState(() => _tempMainColor = color),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -100,34 +46,19 @@ class _AddProfileState extends State<AddProfile> {
         child: ListView(
           children: <Widget>[
             nameTextField(),
-            SizedBox(
-              height: 20,
-            ),
+            
             professionTextField(),
-            SizedBox(
-              height: 20,
-            ),
+            
             titlelineTextField(),
-            SizedBox(
-              height: 20,
-            ),
+            
             hastagTextField(),
-            SizedBox(
-              height: 20,
-            ),
+            
             dobTextField(),
-            SizedBox(
-              height: 20,
-            ),
+            
             aboutTextField(),
-            SizedBox(
-              height: 20,
-            ),
+            
             phoneTextField(),
-            SizedBox(
-              height: 20,
-            ),
-            SizedBox(height: 20),
+            
             addButton(),
           ],
         ),
@@ -172,6 +103,8 @@ class _AddProfileState extends State<AddProfile> {
     return Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: 10,
+                vertical: 10,
+
       ),
       child: TextFormField(
         controller: _profession,
@@ -204,6 +137,8 @@ class _AddProfileState extends State<AddProfile> {
     return Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: 10,
+                vertical: 10,
+
       ),
       child: TextFormField(
         controller: _titleline,
@@ -235,7 +170,8 @@ class _AddProfileState extends State<AddProfile> {
   Widget dobTextField() {
     return Padding(
       padding: const EdgeInsets.symmetric(
-        horizontal: 10,
+        horizontal: 10,        vertical: 10,
+
       ),
       child: TextFormField(
         controller: _DOB,

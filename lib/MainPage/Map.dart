@@ -70,6 +70,7 @@ class _LocationState extends State<Location>
   ];
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
         body: Stack(children: [
       FlutterMap(
@@ -108,27 +109,9 @@ class _LocationState extends State<Location>
               border: OutlineInputBorder(),
               hintStyle: TextStyle(color: Colors.white),
               hintText: 'What do you want to eat?'),
-          onChanged: (query) {
-            /*setState(() {
-              check = true;
-            });*/
+          onChanged: (query) {          
             print(query);
-            net.post({"image_name": textcontrol.text}).then((value) {
-              if (value.statusCode == 200) {
-                print("Ok");
-
-                var res = json.decode(value.body);
-                if (res != null) {
-                  setState(() {
-                    lat = res["lat"];
-                    lng = res["lng"];
-                  });
-                }
-              } else {
-                print("No result return !");
-                return;
-              }
-            });
+            
           },
         ),
       ),
@@ -158,9 +141,23 @@ class _LocationState extends State<Location>
         onTap: () {
           setState(() {
             loading = true;
-            
+            check = false;
           });
+          net.post({"image_name": textcontrol.text}).then((value) {
+              if (value.statusCode == 200) {
 
+                var res = json.decode(value.body);
+                if (res != null) {
+                  setState(() {
+                    lat = res["lat"];
+                    lng = res["lng"];
+                  });
+                }
+              } else {
+                print("No result return !");
+                return;
+              }
+            });
           network.post("/blogpost/getSome/Distance", {
             "distance": double.parse(distanceControl.text),
             "lat": lat,
@@ -177,22 +174,9 @@ class _LocationState extends State<Location>
               print("Bad request. Try again");
             }
           });
-          
-          markers.add(
-            Marker(
-              width: 20.0,
-              height: 20.0,
-              point: LatLng(lat, lng),
-              builder: (ctx) => Container(
-                child: FlutterLogo(
-                  key: ObjectKey(Colors.purple),
-                ),
-              ),
-            ),
-          );
           setState(() {
-            loading = false;
             check = true;
+            loading = false;
           });
         },
       ),
@@ -202,9 +186,13 @@ class _LocationState extends State<Location>
   
   Widget _result() {
     if (check == false && loading == false) return Text("Choose your location");
-    else if (check == true && loading == false && listOfResult.length == 0) return Text("No destinations found");
+    else if (loading == true && check == false) return Center(
+      child: Container(
+        height: 30,
+        width: 30,
+        child: CircularProgressIndicator()));
 
-    else if (loading == false && check == true)return ListView.builder(
+    else if (loading == false && check == true) return (listOfResult.length > 0) ? ListView.builder(
               shrinkWrap: true,
               primary: false,
               itemCount: listOfResult.length,
@@ -217,8 +205,8 @@ class _LocationState extends State<Location>
 
                 );
               },
-            );
-    return CircularProgressIndicator();
+            ) : Text("No destinations found");
+   
   }
   Widget _filter() {
     List choice = [

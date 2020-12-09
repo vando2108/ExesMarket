@@ -24,35 +24,38 @@ class _SubPageState extends State<SubPage> with AutomaticKeepAliveClientMixin {
     super.initState();
     future = network.post("/history/getAllBuy", {"status": widget.query});
   }
+
   Future<void> _showMyDialog() async {
-  return showDialog<void>(
-    context: context,
-    barrierDismissible: false, // user must tap button!
-    builder: (BuildContext context) {
-      return AlertDialog(
-        title: Text('AlertDialog Title'),
-        content: SingleChildScrollView(
-          child: ListBody(
-            children: <Widget>[
-              Text('This is a demo alert dialog.'),
-              Text('Would you like to approve of this message?'),
-            ],
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('AlertDialog Title'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text('This is a demo alert dialog.'),
+                Text('Would you like to approve of this message?'),
+              ],
+            ),
           ),
-        ),
-        actions: <Widget>[
-          FlatButton(
-            child: Text('cancel'),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
-        ],
-      );
-    },
-  );
-}
+          actions: <Widget>[
+            FlatButton(
+              child: Text('cancel'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
         body: Stack(
       children: [
@@ -92,89 +95,144 @@ class ItemChild extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(children: [
+    return Row(
+      children: [
+        Container(
+            padding: EdgeInsets.all(20.0),
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Row(children: [
+                Text("SELLER : ",
+                    style: TextStyle(
+                        color: kPrimaryColor,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold)),
+                Text("${child["seller"]}",
+                    maxLines: 2, style: TextStyle(fontSize: 17)),
+              ]),
+              Row(children: [
+                Text("BUYER : ",
+                    style: TextStyle(
+                        color: Colors.red,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold)),
+                Text("${child["buyer"]}",
+                    maxLines: 2, style: TextStyle(fontSize: 17)),
+              ]),
+              Row(
+                children: [
+                  Text("PRODUCT : ",
+                      style: TextStyle(
+                          color: Colors.orange, fontWeight: FontWeight.bold)),
+                  Text("${child["title"]}",
+                      maxLines: 2, style: TextStyle(fontSize: 17)),
+                ],
+              ),
+              Row(children: [
+                Text("STOCK : ",
+                    style: TextStyle(
+                        color: Colors.orange, fontWeight: FontWeight.bold)),
+                Text("${child["stock"]}",
+                    maxLines: 2, style: TextStyle(fontSize: 17)),
+              ]),
+              Row(children: [
+                Text("ADDRESS : ",
+                    style: TextStyle(
+                        color: Colors.orange, fontWeight: FontWeight.bold)),
+                Text("${child["address"]}",
+                    maxLines: 2, style: TextStyle(fontSize: 17)),
+              ]),
+              Row(
+                children: [
+                  Text("DISTRICT : ",
+                      style: TextStyle(
+                          color: Colors.orange, fontWeight: FontWeight.bold)),
+                  Text("${child["district"]}",
+                      maxLines: 2, style: TextStyle(fontSize: 17)),
+                ],
+              ),
+              Row(
+                children: [
+                  Text("TIME : ",
+                      style: TextStyle(
+                          color: Colors.orange, fontWeight: FontWeight.bold)),
+                  Text("${child["time"]}",
+                      maxLines: 2, style: TextStyle(fontSize: 17)),
+                ],
+              ),
+              (child["sellled"] == false)
+                  ? Text("THE TRADE IS STILL",
+                      style: TextStyle(
+                          color: kPrimaryColor, fontWeight: FontWeight.bold))
+                  : Text("THE TRADE IS ENDED",
+                      style: TextStyle(
+                          color: Colors.red, fontWeight: FontWeight.bold)),
+              Row(
+                children: [
+                  Text("STATUS : ",
+                      style: TextStyle(
+                          color: Colors.orange, fontWeight: FontWeight.bold)),
+                  Text("${child["status"]}",
+                      maxLines: 2, style: TextStyle(fontSize: 17)),
+                ],
+              ),
+              Row(
+                children: [
+                  Text("MESSAGE FROM BUYER : ",
+                      style: TextStyle(
+                          color: Colors.orange, fontWeight: FontWeight.bold)),
+                  Text("${child["body"]}", style: TextStyle(fontSize: 17)),
+                ],
+              ),
+              Row(
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  PageEditHistory(data: child)));
+                    },
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                      margin: EdgeInsets.only(right: 20, top: 20),
+                      child: Icon(Icons.directions, color: Colors.white),
+                      decoration: BoxDecoration(
+                        color: kPrimaryColor, 
+                        
+                      )
+                    )
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      AlertDialog(
+                        title: Text("Are you sure ?"),
+                        actions: <Widget>[
+                          FlatButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: Text("cancel")),
+                          FlatButton(onPressed: () {}, child: Text("delete"))
+                        ],
+                      );
+                    },
+                    child: Container(
+                                            margin: EdgeInsets.only(right: 20, top: 20),
+                      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                      child: Icon(Icons.delete, color: Colors.white),
+                      decoration: BoxDecoration(
+                        color: Colors.red,
 
-      Container(
-        padding: EdgeInsets.all(20.0),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Row(children: [
-            Text("SELLER : ", style : TextStyle (color: kPrimaryColor, fontSize: 20, fontWeight: FontWeight.bold)),
-            Text("${child["seller"]}", style: TextStyle(fontSize: 17)),
-          ]),
-          Row(children: [
-            Text("BUYER : ", style: TextStyle(color: Colors.red, fontSize: 20, fontWeight: FontWeight.bold)),
-            Text("${child["buyer"]}", style: TextStyle(fontSize: 17)),
-          ]),
-          Row(
-            children: [
-              Text("PRODUCT : ",style: TextStyle(color: Colors.orange, fontWeight: FontWeight.bold)),
-              Text("${child["title"]}", style: TextStyle(fontSize: 17)),
-            ],
-          ),
-          Row(children: [
-            Text("STOCK : ",style: TextStyle(color: Colors.orange, fontWeight: FontWeight.bold)),
-            Text("${child["stock"]}", style: TextStyle(fontSize: 17)),
-          ]),
-          Row(children: [
-            Text("ADDRESS : ",style: TextStyle(color: Colors.orange, fontWeight: FontWeight.bold)),
-            Text("${child["address"]}", style: TextStyle(fontSize: 17)),
-          ]),
-          Row(
-            children: [
-              Text("DISTRICT : ",style: TextStyle(color: Colors.orange, fontWeight: FontWeight.bold)),
-              Text("${child["district"]}", style: TextStyle(fontSize: 17)),
-            ],
-          ),
-          Row(
-            children: [
-              Text("TIME : ",style: TextStyle(color: Colors.orange, fontWeight: FontWeight.bold)),
-              Text("${child["time"]}", style: TextStyle(fontSize: 17)),
-            ],
-          ),
-          (child["sellled"] == false)
-              ? Text("THE TRADE IS STILL", style : TextStyle(color:kPrimaryColor, fontWeight: FontWeight.bold))
-              : Text("THE TRADE IS ENDED", style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold)),
-          Row(
-            children: [
-              Text("STATUS : ",style: TextStyle(color: Colors.orange, fontWeight: FontWeight.bold)),
-              Text("${child["status"]}", style: TextStyle(fontSize: 17)),
-            ],
-          ),
-          Row(
-            children: [
-              Text("MESSAGE FROM BUYER : ",style: TextStyle(color: Colors.orange, fontWeight: FontWeight.bold)),
-              Text("${child["body"]}", style: TextStyle(fontSize: 17)),
-            ],
-          )
-        ])),
-        GestureDetector(
-          onTap: (){
-             Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    PageEditHistory(data: child)));
-          },
-          child: Icon(Icons.directions, color: Colors.grey),),
-           GestureDetector(
-          onTap: () {
-            AlertDialog(
-      title: Text("Are you sure ?"),
-      actions: <Widget>[
-        FlatButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            child: Text("cancel")),
-        FlatButton(
-            onPressed: () {
-              
-            },
-            child: Text("delete"))
+                      ),
+                    ),
+                    
+                  )
+                ],
+              )
+            ])),
       ],
     );
-          },
-          child: Icon(Icons.delete, color: Colors.red),)
-    ],);
   }
 }

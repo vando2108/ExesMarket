@@ -19,17 +19,15 @@ class _AddItemState extends State<AddItem> {
   TextEditingController _title = TextEditingController();
   TextEditingController _body = TextEditingController();
   TextEditingController _material = TextEditingController();
-  TextEditingController _image = TextEditingController();
+  //TextEditingController _image = TextEditingController();
   TextEditingController _stock = TextEditingController();
   TextEditingController _hastag = TextEditingController();
   TextEditingController _price = TextEditingController();
-  //ImagePicker _picker = ImagePicker();
-  //PickedFile _imageFile;
+
   IconData iconphoto = Icons.image;
   NetworkHandler networkHandler = NetworkHandler();
 
   ColorSwatch _tempMainColor;
-  Color _tempShadeColor;
   ColorSwatch _mainColor = Colors.blue;
   List sex = ["male", "female", "unisex"];
   List color = [Colors.redAccent, Colors.redAccent,Colors.redAccent];
@@ -38,7 +36,10 @@ class _AddItemState extends State<AddItem> {
   List colorSize = [Colors.redAccent, Colors.redAccent,Colors.redAccent,Colors.redAccent,Colors.redAccent];
   String _sex;
   String _size;
-
+  
+  List images = [];
+  List<TextEditingController> _image = [];
+  int idx = -1;
   void _openDialog(String title, Widget content) {
     showDialog(
       context: context,
@@ -100,34 +101,21 @@ class _AddItemState extends State<AddItem> {
         child: ListView(
           children: <Widget>[
             titleTextField(),
-            SizedBox(
-              height: 20,
-            ),
+           
             bodyTextField(),
-            SizedBox(
-              height: 20,
-            ),
+            
             materialTextField(),
-            SizedBox(
-              height: 20,
-            ),
+            
             imageTextField(),
-            SizedBox(
-              height: 20,
-            ),
+           
             stockTextField(),
-            SizedBox(
-              height: 20,
-            ),
+            
             hastagTextField(),
-            SizedBox(
-              height: 20,
-            ),
+            
             priceTextField(),
-            SizedBox(
-              height: 20,
-            ),
+           
             choiceGender(),
+
             choiceSize(),
            Row(
              children: [
@@ -250,7 +238,7 @@ class _AddItemState extends State<AddItem> {
   Widget bodyTextField() {
     return Padding(
       padding: const EdgeInsets.symmetric(
-        horizontal: 10,
+        horizontal: 10, vertical: 10,
       ),
       child: TextFormField(
         controller: _body,
@@ -282,7 +270,7 @@ class _AddItemState extends State<AddItem> {
   Widget materialTextField() {
     return Padding(
       padding: const EdgeInsets.symmetric(
-        horizontal: 10,
+        horizontal: 10,  vertical: 10,
       ),
       child: TextFormField(
         controller: _material,
@@ -312,12 +300,40 @@ class _AddItemState extends State<AddItem> {
   }
 
   Widget imageTextField() {
+    return Column(
+      children: [
+        IconButton(
+      icon: Icon(Icons.add),
+      onPressed: (){
+        setState((){
+          idx++;
+        });
+        TextEditingController control = new TextEditingController();
+        _image.add(control);
+        images.add(childImage(idx));
+      }
+    ),
+    ListView.builder(
+      shrinkWrap:  true,
+      primary: false,
+      itemCount : images.length,
+      itemBuilder: (context, index){
+        return childImage(index);
+      }
+    )
+        ,
+    
+      ]
+    );
+  }
+  
+  Widget childImage(int index){
     return Padding(
       padding: const EdgeInsets.symmetric(
-        horizontal: 10,
+        horizontal: 10, vertical: 10
       ),
       child: TextFormField(
-        controller: _image,
+        controller: _image[index],
         validator: (value) {
           if (value.isEmpty) {
             return "Type here if you have any messages";
@@ -342,7 +358,6 @@ class _AddItemState extends State<AddItem> {
       ),
     );
   }
-
   Widget stockTextField() {
     return Padding(
       padding: const EdgeInsets.symmetric(
@@ -448,11 +463,13 @@ class _AddItemState extends State<AddItem> {
       onTap: () async {
         if (_globalkey.currentState.validate()) {
           print("haha");
+          List image = [];
+          for (var i = 0; i< _image.length; ++i) image.add(_image[i].text);
           var response = await networkHandler.post("/blogpost/Add", {
               "title":  _title.text,
               "body": _body.text,
               "material": _material.text,
-              "image":  [_image.text],
+              "image":  image,
               "stock": _stock.text,
               "hastag": [_hastag.text],
               "price": _price.text,

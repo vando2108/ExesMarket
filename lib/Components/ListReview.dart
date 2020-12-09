@@ -12,14 +12,7 @@ class ListReview extends StatefulWidget {
 }
 
 class _ListReviewState extends State<ListReview> with TickerProviderStateMixin {
-  Text _buildRatingStars(int rating) {
-    String stars = '';
-    for (int i = 0; i < rating; i++) {
-      stars += '⭐ ';
-    }
-    stars.trim();
-    return Text(stars);
-  }
+  
   NetworkHandler network  = NetworkHandler();
   TextEditingController textController = TextEditingController();
   TabController _tabController;
@@ -152,15 +145,6 @@ class _ListReviewState extends State<ListReview> with TickerProviderStateMixin {
             ),
           
       );
-  }
-
-  Widget _result() {
-    if (check == true){
-      network.post("/blogpost/getOne", {}).then((value) {
-
-      });
-    }
-
   }
 
   Widget _filter() {
